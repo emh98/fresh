@@ -1,22 +1,34 @@
 <?php
 
 require_once "controllers/Errors.php";
-
+/**
+ * StartApp (class worker) :)
+ * 
+ * Libreria para los direcionamientos e iniciación de la app.
+ * 
+ * Permite redireccionar entre las paginas web.
+ * Permite Iniciar la aplicacion web.
+ * 
+ * @author Emanuel Mateus Huepo
+ * @package libs
+ */
     class StartApp
     {
+        /**
+         * Constructor de la liberia de iniciacion de toda la app.
+         */
         function __construct()
         {
-            //echo "<p>New App</p>";
 
             $url = isset($_GET['url']) ? $_GET['url']: null;
             $url = rtrim($url,'/');
             $url = explode('/',$url);
 
             if(empty($url[0])){
-                $archivoController = 'controllers/main.php';
+                $archivoController = 'controllers/Main.php';
                 require_once $archivoController;
                 $controller = new Main();
-                $controller->loadModel('main');
+                $controller->loadModel('Main','Main');
                 $controller->render();
                 return false;
             }
@@ -27,7 +39,6 @@ require_once "controllers/Errors.php";
 
                 require_once $archivoController;
                 $controller = new $url[0];
-                //$controller->loadModel($url[0]);
 
                 $nparam = sizeof($url);
 
